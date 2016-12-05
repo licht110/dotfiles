@@ -1,5 +1,11 @@
 #export LANG=ja_JP.UTF-8
 export LANG=en_US.UTF-8
+export LD_LIBRARY_PATH="/usr/local/lib"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$PYENV_ROOT/bin:$PATH
+export PYENV_ROOT=$HOME/.pyenv
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
 
 export PATH="$HOME/bin:$PATH"
 
