@@ -1,5 +1,6 @@
 #export LANG=ja_JP.UTF-8
 export LANG=en_US.UTF-8
+export PATH="$HOME/usr/local/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PYENV_ROOT=$HOME/.pyenv
@@ -55,6 +56,7 @@ alias diff='diff -U1'
 alias history="history -E 1"
 alias rrh='sshpass -p $(openssl rsautl -inkey ~/.ssh/private.key -in ~/.ssh/secret -decrypt) ssh -o StrictHostKeyChecking=no'
 alias rscp='sshpass -p $(openssl rsautl -inkey ~/.ssh/private.key -in ~/.ssh/secret -decrypt) scp -P14022 -p'
+alias tmux='tmux -2'
 
 #stty erase ^H
 bindkey "^[[3~" delete-char
