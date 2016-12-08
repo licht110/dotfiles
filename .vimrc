@@ -61,7 +61,7 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
 NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+"NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'soramugi/auto-ctags.vim'
