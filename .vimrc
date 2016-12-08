@@ -59,6 +59,11 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
   \   'mappings' : ['<Plug>(EasyAlign)'],
   \ }}
 NeoBundle 'rcmdnk/vim-markdown'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'tpope/vim-fugitive'
 
 call neobundle#end()
 
@@ -201,3 +206,10 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " vim-markdown {{{
 let g:vim_markdown_folding_disabled = 1
+
+" vim-indent-guides setting
+let g:indent_guides_enable_on_vim_startup = 1
+
+" vim-fugitive
+autocmd QuickFixCmdPost *grep* cwindow
+set statusline+=%{fugitive#statusline()}
