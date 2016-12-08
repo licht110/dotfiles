@@ -64,6 +64,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'soramugi/auto-ctags.vim'
 
 call neobundle#end()
 
@@ -213,3 +214,13 @@ let g:indent_guides_enable_on_vim_startup = 1
 " vim-fugitive
 autocmd QuickFixCmdPost *grep* cwindow
 set statusline+=%{fugitive#statusline()}
+
+" ctags setting
+nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+" unite-tagsの設定
+" autocmd BufEnter *
+"   \   if empty(&buftype)
+"   \|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately
+"   tag<CR>
+"   \|  endif
