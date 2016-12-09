@@ -65,6 +65,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'soramugi/auto-ctags.vim'
+NeoBundle 'mattn/webapi-vim'
 
 call neobundle#end()
 
@@ -224,3 +225,8 @@ nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 "   \|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately
 "   tag<CR>
 "   \|  endif
+
+" vim-markdown setting
+hi link htmlItalic LineNr
+hi link htmlBold WarningMsg
+hi link htmlBoldItalic ErrorMsg
