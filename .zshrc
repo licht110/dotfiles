@@ -48,6 +48,7 @@ elif [ "$(uname -a | egrep "^Darwin")" ];then
   alias l='ls -ltr -G'
   alias la='ls -la -G'
   alias ll='ls -l -G'
+	alias ctags="`brew --prefix`/bin/ctags"
 fi
 #alias so='source'
 #alias v='vim'
