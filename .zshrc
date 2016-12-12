@@ -36,7 +36,7 @@ alias -g G='| egrep'
 #alias -g GI='| grep -ri'
 vi='vim'
 
-if [ "$(uname -a | egrep "^Linux")" ];then
+if [ "$(uname -a | egrep "^(Linux|CYGWIN)")" ];then
   alias ls='ls --color=auto'
   alias lst='ls -ltr --color=auto'
   alias l='ls -ltr --color=auto'
