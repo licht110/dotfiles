@@ -36,11 +36,20 @@ alias -g G='| egrep'
 #alias -g GI='| grep -ri'
 vi='vim'
 
-alias ls='ls --color=auto'
-alias lst='ls -ltr --color=auto'
-alias l='ls -ltr --color=auto'
-alias la='ls -la --color=auto'
-alias ll='ls -l --color=auto'
+if [ "$(uname -a | egrep "^Linux")" ];then
+  alias ls='ls --color=auto'
+  alias lst='ls -ltr --color=auto'
+  alias l='ls -ltr --color=auto'
+  alias la='ls -la --color=auto'
+  alias ll='ls -l --color=auto'
+elif [ "$(uname -a | egrep "^Darwin")" ];then
+  alias ls='ls -G'
+  alias lst='ls -ltr -G'
+  alias l='ls -ltr -G'
+  alias la='ls -la -G'
+  alias ll='ls -l -G'
+	alias ctags="`brew --prefix`/bin/ctags"
+fi
 #alias so='source'
 #alias v='vim'
 #alias vi='vim'
@@ -62,8 +71,11 @@ alias tmux='tmux -2'
 #stty erase ^H
 bindkey "^[[3~" delete-char
 
-#chpwd() { ls -ltr --color=auto }
-chpwd() { ls --color=auto }
+if [ "$(uname -a | egrep "^Linux")" ];then
+  chpwd() { ls --color=auto }
+elif [ "$(uname -a | egrep "^Darwin")" ];then
+  chpwd() { ls -G}
+fi
 
 cdpath=(~)
 

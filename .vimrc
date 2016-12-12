@@ -140,7 +140,6 @@ highlight PMenuSbar ctermbg=4
 set completeopt=menuone
 set completeopt=menuone
 let g:rsenseUseOmniFunc = 1
-let g:auto_ctags = 1
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_underbar_completion = 1
@@ -158,6 +157,11 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 		        let g:neocomplete#keyword_patterns = {}
 					endif
 					let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" auto-ctags setting
+let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git']
+set tags+=.git/tags
 
 " vimshell setting
 nmap <silent> vs :<C-u>VimShell<CR>
