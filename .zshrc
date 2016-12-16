@@ -5,8 +5,8 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
-[ "$(which pyenv 1>/dev/null 2>&1)" ] && eval "$(pyenv init -)" ||:
-[ "$(which rbenv 1>/dev/null 2>&1)" ] && eval "$(rbenv init -)" ||:
+[ "$(which pyenv 2>/dev/null)" ] && eval "$(pyenv init -)" ||:
+[ "$(which rbenv 2>/dev/null)" ] && eval "$(rbenv init -)" ||:
 
 export PATH="$HOME/bin:$PATH"
 
