@@ -77,6 +77,8 @@ if [ "$(uname -a | egrep "^Linux")" ];then
   chpwd() { ls --color=auto }
 elif [ "$(uname -a | egrep "^Darwin")" ];then
   chpwd() { ls -G}
+else
+  chpwd() { ls --color=auto }
 fi
 
 cdpath=(~)
@@ -102,7 +104,7 @@ autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^p" history-beginning-search-backward-end
-bindkey "^b" history-beginning-search-forward-end
+bindkey "^n" history-beginning-search-forward-end
 
 autoload -Uz add-zsh-hook
 autoload -Uz chpwd_recent_dirs cdr
