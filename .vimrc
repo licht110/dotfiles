@@ -70,6 +70,12 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'thinca/vim-quickrun'
+"NeoBundle 'shikato/vim2browser.vim'
+NeoBundle 'itchyny/lightline.vim'
+"NeoBundle 'tomasr/molokai'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'yuratomo/w3m.vim'
 
 call neobundle#end()
 
@@ -255,4 +261,13 @@ augroup PrevimSettings
 	    autocmd!
 			    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-"let g:previm_open_cmd = 'cygstart firefox -a'
+let g:previm_open_cmd = 'cygstart /home/SCI01506/.vim/bundle/previm/preview/index.html'
+
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+" molokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
