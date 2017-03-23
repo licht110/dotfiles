@@ -234,3 +234,6 @@ nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 hi link htmlItalic LineNr
 hi link htmlBold WarningMsg
 hi link htmlBoldItalic ErrorMsg
+
+" copy to clipboard
+:set clipboard+=autoselect
