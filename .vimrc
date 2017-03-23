@@ -66,6 +66,10 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'soramugi/auto-ctags.vim'
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'thinca/vim-quickrun'
 
 call neobundle#end()
 
@@ -237,3 +241,18 @@ hi link htmlBoldItalic ErrorMsg
 
 " copy to clipboard
 :set clipboard+=autoselect
+
+" vim-markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" open-browser
+"let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gs <Plug>(openbrowser-smart-search)
+vmap gs <Plug>(openbrowser-smart-search)
+
+" previm
+augroup PrevimSettings
+	    autocmd!
+			    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+"let g:previm_open_cmd = 'cygstart firefox -a'
