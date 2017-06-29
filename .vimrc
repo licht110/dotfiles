@@ -75,7 +75,7 @@ NeoBundle 'itchyny/lightline.vim'
 "NeoBundle 'tomasr/molokai'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-"NeoBundle 'yuratomo/w3m.vim'
+NeoBundle 'yuratomo/w3m.vim'
 
 call neobundle#end()
 
@@ -109,8 +109,9 @@ nnoremap :install :NeoBundleInstall
 nnoremap :update :NeoBundleUpdate
 nnoremap :clean :NeoBundleClean
 "set list listchars=tab:\?\-
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set ignorecase
 set smartcase
 set incsearch
@@ -220,8 +221,6 @@ let g:EasyMotion_enter_jump_first = 1
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
-" vim-markdown {{{
-let g:vim_markdown_folding_disabled = 1
 
 " vim-indent-guides setting
 let g:indent_guides_enable_on_vim_startup = 1
@@ -241,15 +240,14 @@ nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 "   \|  endif
 
 " vim-markdown setting
+let g:vim_markdown_folding_disabled = 1
+au BufRead,BufNewFile *.md set filetype=markdown
 hi link htmlItalic LineNr
 hi link htmlBold WarningMsg
 hi link htmlBoldItalic ErrorMsg
 
 " copy to clipboard
 :set clipboard+=autoselect
-
-" vim-markdown
-au BufRead,BufNewFile *.md set filetype=markdown
 
 " open-browser
 "let g:netrw_nogx = 1 " disable netrw's gx mapping.
