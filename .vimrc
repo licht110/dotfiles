@@ -73,8 +73,8 @@ NeoBundle 'thinca/vim-quickrun'
 "NeoBundle 'shikato/vim2browser.vim'
 NeoBundle 'itchyny/lightline.vim'
 "NeoBundle 'tomasr/molokai'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'Shougo/neosnippet'
+"NeoBundle 'Shougo/neosnippet-snippets'
 "NeoBundle 'yuratomo/w3m.vim'
 
 call neobundle#end()
