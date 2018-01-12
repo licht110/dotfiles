@@ -90,7 +90,7 @@ select-word-style default
 
 setopt no_flow_control
 
-PROMPT="%(?.%F{078}.%F{009})%n${reset_color}@%F{007}%m${reset_color} %~
+PROMPT="%(?.%F{078}.%F{009})%n${reset_color}@%F{178}%m${reset_color} %~
 %# "
 
 zstyle ':completion:*:default' menu select=2
