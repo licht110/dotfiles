@@ -21,7 +21,6 @@ NeoBundle 'w0ng/vim-hybrid'
 "NeoBundle 'jonathanfilip/vim-lucius'
 "NeoBundle 'codeschool-vim-theme'
 NeoBundle 'crooloose/nerdtree'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -104,6 +103,7 @@ set wildmode=list:longest
 " key mapping
 nnoremap j gj
 nnoremap k gk
+nnoremap :ss :split
 nnoremap :tr :NERDTreeToggle
 nnoremap :install :NeoBundleInstall
 nnoremap :update :NeoBundleUpdate
