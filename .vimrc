@@ -259,7 +259,7 @@ augroup PrevimSettings
 	    autocmd!
 			    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-let g:previm_open_cmd = 'cygstart /home/SCI01506/.vim/bundle/previm/preview/index.html'
+"let g:previm_open_cmd = 'cygstart /home/SCI01506/.vim/bundle/previm/preview/index.html'
 
 " lightline
 let g:lightline = {
