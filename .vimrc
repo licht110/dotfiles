@@ -269,3 +269,9 @@ let g:lightline = {
 " molokai
 "let g:molokai_original = 1
 "let g:rehash256 = 1
+
+" nerdtree
+if !argc()
+    autocmd vimenter * NERDTree|normal gg3j
+endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
