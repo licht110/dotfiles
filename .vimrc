@@ -20,7 +20,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'w0ng/vim-hybrid'
 "NeoBundle 'jonathanfilip/vim-lucius'
 "NeoBundle 'codeschool-vim-theme'
-NeoBundle 'crooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -269,3 +269,6 @@ let g:lightline = {
 " molokai
 "let g:molokai_original = 1
 "let g:rehash256 = 1
+
+" nerdtree
+autocmd vimenter * NERDTree
