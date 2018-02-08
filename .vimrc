@@ -172,7 +172,7 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 " auto-ctags setting
 let g:auto_ctags = 1
 let g:auto_ctags_directory_list = ['.git']
-set tags+=.git/tags
+set tags+=./.tags;
 
 " vimshell setting
 nmap <silent> vs :<C-u>VimShell<CR>
@@ -271,4 +271,7 @@ let g:lightline = {
 "let g:rehash256 = 1
 
 " nerdtree
-autocmd vimenter * NERDTree
+if !argc()
+    autocmd vimenter * NERDTree|normal gg3j
+endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
