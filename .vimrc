@@ -18,11 +18,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles:
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'w0ng/vim-hybrid'
-"NeoBundle 'jonathanfilip/vim-lucius'
-"NeoBundle 'codeschool-vim-theme'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/deoplete.nvim'
+NeoBundle 'roxma/nvim-yarp'
+NeoBundle 'roxma/vim-hug-neovim-rpc'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
   \     'windows' : 'make -f make_mingw32.mak',
@@ -60,7 +60,7 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
 NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-surround'
-"NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'soramugi/auto-ctags.vim'
@@ -69,12 +69,19 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'shikato/vim2browser.vim'
 NeoBundle 'itchyny/lightline.vim'
-"NeoBundle 'tomasr/molokai'
-"NeoBundle 'Shougo/neosnippet'
-"NeoBundle 'Shougo/neosnippet-snippets'
-"NeoBundle 'yuratomo/w3m.vim'
+NeoBundle 'simeji/winresizer'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'hashivim/vim-terraform'
+NeoBundle 'vim-syntastic/syntastic'
+NeoBundle 'juliosueiras/vim-terraform-completion'
+NeoBundle 'sebosp/vim-snippets-terraform'
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'Shougo/unite-outline'
 
 call neobundle#end()
 
@@ -82,14 +89,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-" if has('nvim')
-"     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"     Plug 'Shougo/deoplete.nvim'
-"     Plug 'roxma/nvim-yarp'
-"     Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-call plug#end()
 
 " Required:
 filetype plugin indent on
@@ -102,6 +101,7 @@ NeoBundleCheck
 " Note: my setting
 "set fenc=utf-8
 "set visualbell
+"set autochdir
 set showcmd
 set autoread
 set hidden
@@ -121,6 +121,9 @@ nnoremap :tr :NERDTreeToggle
 nnoremap :install :NeoBundleInstall
 nnoremap :update :NeoBundleUpdate
 nnoremap :clean :NeoBundleClean
+nnoremap :tt :call deoplete#custom#option('omni_patterns', {'complete_method': 'omnifunc', 'terraform': '[^ *\t"{=$]\w*'})
+nnoremap :tf :call deoplete#custom#option('omni_patterns', {})
+
 "set list listchars=tab:\?\-
 set tabstop=4
 set shiftwidth=4
@@ -157,47 +160,23 @@ au FileType unite imap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite nmap <silent> <buffer> <ESC><ESC> q
 au FileType unite imap <silent> <buffer> <ESC><ESC> <ESC>q
 
-" neocomplete setting
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-l> neocomplete#complete_common_string()
-" inoremap <expr><C-i> neocomplete#complete_common_string()
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
 " deoplete setting
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete = v:true
+let g:deoplete#auto_complete_delay = 0
+" deoplete for terraform
+let g:deoplete#omni_patterns = {}
+" call deoplete#custom#option('omni_patterns', {
+"             \ 'complete_method': 'omnifunc',
+"             \ 'terraform': '[^ *\t"{=$]\w*',
+"             \})
+"
+" call deoplete#initialize()
 
 " auto-ctags setting
 let g:auto_ctags = 1
-let g:auto_ctags_directory_list = ['.git']
-set tags+=./.git/tags;
+let g:auto_ctags_directory_list = ['.git', '.']
+set tags+=./tags;
 
 " vimshell setting
 nmap <silent> vs :<C-u>VimShell<CR>
@@ -249,6 +228,8 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " vim-indent-guides setting
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 
 " vim-fugitive
 autocmd QuickFixCmdPost *grep* cwindow
@@ -257,6 +238,7 @@ set statusline+=%{fugitive#statusline()}
 " ctags setting
 nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 nnoremap <C-k> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+
 " unite-tagsの設定
 " autocmd BufEnter *
 "   \   if empty(&buftype)
@@ -291,12 +273,92 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 
-" molokai
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-
 " nerdtree
 if !argc()
     autocmd vimenter * NERDTree|normal gg3j
 endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split enew' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_buffers_jump = 1
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_tags_command = 'ctags -R'
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+" winresizer
+let g:winresizer_gui_enable = 1
+let g:winresizer_start_key = '<C-X>'
+
+" neosnippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" terraform vim setting
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_remap_spacebar=1
+let g:terraform_commentstring='//%s'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:terraform_fmt_on_save = 1
+" (Optional)Remove Info(Preview) window
+set completeopt-=preview
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tffilter_plan = 1
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 0
+
+" tagbar setting
+nnoremap <silent> <C-o> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
