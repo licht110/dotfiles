@@ -195,6 +195,10 @@ nnoremap :gg  :GitGutterToggle
 nnoremap :ggl :GitGutterLineHighlightsToggle
 nnoremap :te :TestFile
 nnoremap mk :make
+inoremap jj <Esc>
+nnoremap Y y$
+nnoremap + <C-a>
+nnoremap - <C-x>
 
 " --------------- settings ---------------
 "set list listchars=tab:\?\-
@@ -222,5 +226,9 @@ set wrapscan
 set hlsearch
 set backspace=indent,eol,start
 set background=dark
+set mouse=a
 colorscheme hybrid
 syntax on
+
+" path setting for python3
+let g:python3_host_prog = $PYENV_ROOT.'/versions/neovim3/bin/python'
