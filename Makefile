@@ -1,7 +1,8 @@
-DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+DOTPATH        := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+CANDIDATES     := $(wildcard .??*) bin
+EXCLUSIONS     := .DS_Store .git .gitmodules .travis.yml
+DOTFILES       := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+PYTHON_VERSION := 3.6.1
 
 .DEFAULT_GOAL := help
 
@@ -30,6 +31,15 @@ update: ## Fetch changes for this repo
 
 install: update deploy init ## Run make update, deploy, init
 	@exec $$SHELL
+
+nvim: ## setup nvim
+	ln -s ./nvim_config ~/.config/nvim
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /var/tmp/installer.sh
+	sh ./installer.sh ~/.cache/dein
+	pyenv install $(PYTHON_VERSION)
+	pyenv virtualenv $(PYTHON_VERSION) neovim3
+	pyenv activate neovim3
+	pip install neovim
 
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory...'
