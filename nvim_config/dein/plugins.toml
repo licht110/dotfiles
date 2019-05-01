@@ -1,0 +1,2 @@
+[[plugins]]
+repo = 'fatih/vim-go'
