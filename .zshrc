@@ -5,6 +5,7 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
+export XDG_CONFIG_HOME="$HOME/.config"
 which pyenv 1>/dev/null 2>&1
 [ "$?" -eq 0 ] && eval "$(pyenv init -)" ||:
 which rbenv 1>/dev/null 2>&1
